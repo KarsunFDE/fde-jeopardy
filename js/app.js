@@ -291,7 +291,11 @@ function renderClueTeams() {
     plus.className = "btn-plus"; plus.textContent = "+$" + v;
     if (!v) { plus.disabled = true; minus.disabled = true; }
     minus.addEventListener("click", (e) => { e.stopPropagation(); adjustScore(i, -1); });
-    plus.addEventListener("click", (e) => { e.stopPropagation(); adjustScore(i, +1); });
+    plus.addEventListener("click", (e) => {
+      e.stopPropagation();
+      adjustScore(i, +1);
+      revealResponse();   // awarding points = correct answer → reveal the response
+    });
     btns.appendChild(minus); btns.appendChild(plus);
 
     cell.appendChild(name); cell.appendChild(score); cell.appendChild(btns);
