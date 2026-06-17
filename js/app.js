@@ -102,6 +102,7 @@ function openClue(catIdx, clueIdx) {
   } else {
     $("#dd-splash").classList.add("hidden");
     $("#clue-card").classList.remove("hidden");
+    renderClueTeams();
     beep(660, 0.12);
     startTimerIfOn();
   }
@@ -146,6 +147,7 @@ $("#dd-go") && $("#dd-go").addEventListener("click", () => {
   $("#dd-splash").classList.add("hidden");
   $("#clue-card").classList.remove("hidden");
   refreshAmounts();   // show the wager (only on the wagering team) on the scoreboard
+  renderClueTeams();  // rebuild in-clue +/- with the wager now in play
   beep(660, 0.12);
   startTimerIfOn();
 });
@@ -252,11 +254,49 @@ function adjustScore(teamIdx, sign) {
   beep(sign > 0 ? 784 : 196, 0.12);
 }
 
+function fmtScore(s) { return s < 0 ? "-$" + Math.abs(s) : "$" + s; }
+
 function updateScoreDisplay(i) {
-  const el = $(`#score-${i}`);
   const s = State.teams[i].score;
-  el.textContent = (s < 0 ? "-$" + Math.abs(s) : "$" + s);
-  el.classList.toggle("neg", s < 0);
+  const el = $(`#score-${i}`);
+  if (el) { el.textContent = fmtScore(s); el.classList.toggle("neg", s < 0); }
+  const oel = $(`#oscore-${i}`);            // mirror onto the in-clue strip
+  if (oel) { oel.textContent = fmtScore(s); oel.classList.toggle("neg", s < 0); }
+}
+
+/* in-clue per-team +/- strip — lets the host award OR deduct the value in play
+   while the clue is up, before (or after) the response is revealed. */
+function renderClueTeams() {
+  const wrap = $("#clue-teams");
+  if (!wrap) return;
+  wrap.innerHTML = "";
+  wrap.onclick = (e) => e.stopPropagation(); // never let a tap here flip the clue
+  State.teams.forEach((t, i) => {
+    const v = valueInPlay(i);
+    const cell = document.createElement("div");
+    cell.className = "ct-team" + (v ? "" : " ct-inactive");
+
+    const name = document.createElement("div");
+    name.className = "ct-name"; name.textContent = t.name;
+
+    const score = document.createElement("div");
+    score.className = "ct-score" + (t.score < 0 ? " neg" : "");
+    score.id = `oscore-${i}`; score.textContent = fmtScore(t.score);
+
+    const btns = document.createElement("div");
+    btns.className = "ct-btns";
+    const minus = document.createElement("button");
+    minus.className = "btn-minus"; minus.textContent = "−$" + v;
+    const plus = document.createElement("button");
+    plus.className = "btn-plus"; plus.textContent = "+$" + v;
+    if (!v) { plus.disabled = true; minus.disabled = true; }
+    minus.addEventListener("click", (e) => { e.stopPropagation(); adjustScore(i, -1); });
+    plus.addEventListener("click", (e) => { e.stopPropagation(); adjustScore(i, +1); });
+    btns.appendChild(minus); btns.appendChild(plus);
+
+    cell.appendChild(name); cell.appendChild(score); cell.appendChild(btns);
+    wrap.appendChild(cell);
+  });
 }
 
 function refreshAmounts() {

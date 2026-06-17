@@ -159,9 +159,38 @@ body { display: flex; flex-direction: column; min-height: 100vh; }
   text-shadow: 2px 2px 0 #000; animation: zoomIn .2s ease-out;
 }
 #clue-hint {
-  margin-top: 30px; font-size: .8rem; color: #b9c2ff; letter-spacing: .5px;
+  margin-top: 22px; font-size: .8rem; color: #b9c2ff; letter-spacing: .5px;
   font-family: "Oswald", sans-serif; text-transform: uppercase;
 }
+
+/* in-clue per-team +/- strip */
+#clue-teams {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  margin-top: 30px;
+}
+#clue-teams:empty { display: none; }
+.ct-team {
+  background: var(--jeop-blue-dk); border: 2px solid var(--jeop-gold);
+  border-radius: 8px; padding: 10px 16px; min-width: 168px;
+  display: flex; flex-direction: column; gap: 6px;
+}
+.ct-team.ct-inactive { opacity: .4; }
+.ct-name {
+  font-family: "Oswald", sans-serif; font-weight: 600; font-size: .95rem;
+  color: var(--jeop-gold-lt); text-transform: uppercase; letter-spacing: .5px;
+  text-align: center;
+}
+.ct-score {
+  font-family: "Anton", sans-serif; font-size: 1.7rem; text-align: center;
+  color: #fff; text-shadow: 2px 2px 0 #000;
+}
+.ct-score.neg { color: #ff5d5d; }
+.ct-btns { display: flex; gap: 8px; }
+.ct-btns button {
+  font-family: "Oswald", sans-serif; font-weight: 700; font-size: 1rem;
+  border: none; border-radius: 6px; padding: 8px 14px; cursor: pointer; flex: 1;
+}
+.ct-btns button:disabled { opacity: .4; cursor: not-allowed; }
 
 /* daily double splash */
 #dd-splash {
