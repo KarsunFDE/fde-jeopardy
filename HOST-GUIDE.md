@@ -48,7 +48,7 @@
 
 **$200**  
 
-- *Clue:* The W1 Thu failure mode where a model confidently invents a FAR clause that doesn't exist — like the draft that cited '48 CFR 47.305-2' as a requirement the CO couldn't find anywhere.  
+- *Clue:* A model confidently invents a FAR clause that doesn't exist — like a draft citing '48 CFR 47.305-2' as a requirement the CO can't find anywhere.  
 - *Response:* **What is hallucination?**  
 - *FDE teaching:* Hallucination is the canonical W1 Thu failure mode; the fix (grounding) is W2's RAG. Until then you manage it with HITL, not eliminate it.  
 - *Source:* W1 Thu / W1 Fri war-room
@@ -69,7 +69,7 @@
 
 **$800 **[TRAP]****  
 
-- *Clue:* Instead of wrapping the Bedrock JSON parse in a try/except with a bare-string fallback, the W1 Thu reading says to do THIS so the eval harness can catch the regression trend.  
+- *Clue:* Instead of wrapping the Bedrock JSON parse in a try/except with a bare-string fallback, you do THIS so the eval harness can catch the regression trend.  
 - *Response:* **What is fail loud (return a structured error and log the failure)?**  
 - *FDE teaching:* TRAP: the tempting dev answer is 'gracefully catch and return the raw string.' That hides failures and makes regression invisible. Fail loud; the eval harness catches the trend.  
 - *Source:* W1 Thu pre-session §1
@@ -115,7 +115,7 @@
 
 **$800**  
 
-- *Clue:* This W2 retrieval pattern indexes the small sub-paragraph chunk for matching but RETURNS the larger parent paragraph to the LLM, so the model sees enough context to reason.  
+- *Clue:* This retrieval pattern indexes the small sub-paragraph chunk for matching but RETURNS the larger parent paragraph to the LLM, so the model sees enough context to reason.  
 - *Response:* **What is parent-child indexing?**  
 - *FDE teaching:* Index small, retrieve large. One of three named answers to the 'fragment loses context' chunking trade-off.  
 - *Source:* W2 Tue pre-session §5 glossary
@@ -140,7 +140,7 @@
 
 **$200**  
 
-- *Clue:* Per the FDE brief, this is 'the single most important question in an FDE's toolkit' — the one you ask before building what the customer literally requested.  
+- *Clue:* This is 'the single most important question in an FDE's toolkit' — the one you ask before building what the customer literally requested.  
 - *Response:* **What is 'What are you trying to accomplish?'**  
 - *FDE teaching:* Customers ask for Y when they need X. Surface the real goal before building the literal ask.  
 - *Source:* FDE brief Part 3 / Part 8
@@ -161,7 +161,7 @@
 
 **$800**  
 
-- *Clue:* Rob Fitzpatrick's method, cited in the FDE brief, for talking to customers so they 'can't lie to you' — by asking about their actual life and workflow, not whether they like your idea.  
+- *Clue:* Rob Fitzpatrick's method for talking to customers so they 'can't lie to you' — by asking about their actual life and workflow, not whether they like your idea.  
 - *Response:* **What is The Mom Test?**  
 - *FDE teaching:* Ask about their workflow and past behavior, not opinions about your solution. The way you surface X without leading questions.  
 - *Source:* FDE brief Part 3
@@ -182,7 +182,7 @@
 | $400 | What is clause precedence (DFARS supplements FAR for DoD acquisitions)? | W2 Tue war-room / pre-session glossary |
 | $600 🔵DD | What is $rankFusion (Reciprocal Rank Fusion)? | W2 Tue pre-session §3 / glossary |
 | $800 | What is faithfulness? | W2 Thu war-room / W2 Fri eval harness |
-| $1000 ⚠️TRAP | What is escalate to a Contracting Officer (HITL #2 / fall back to a human)? | W2 Thu war-room (HITL #2) |
+| $1000 ⚠️TRAP | What is escalate to a Contracting Officer (fall back to a human)? | W2 Thu war-room (HITL #2) |
 
 **$200**  
 
@@ -193,7 +193,7 @@
 
 **$400**  
 
-- *Clue:* The W2 Tue vendor question — 'FAR 15.208(a) says 30 calendar days but DFARS 215.371-4 references different timing, which governs?' — exposes the need to encode THIS rule (per 48 CFR §201.104) as chunk metadata.  
+- *Clue:* A vendor question — 'FAR 15.208(a) says 30 calendar days but DFARS 215.371-4 references different timing, which governs?' — exposes the need to encode THIS rule (per 48 CFR §201.104) as chunk metadata.  
 - *Response:* **What is clause precedence (DFARS supplements FAR for DoD acquisitions)?**  
 - *FDE teaching:* Dual-source retrieval over FAR alone misses the DFARS supplement; precedence per 48 CFR §201.104 must be encoded, not assumed.  
 - *Source:* W2 Tue war-room / pre-session glossary
@@ -207,15 +207,15 @@
 
 **$800**  
 
-- *Clue:* In W2 Thu, the model cited real clause FAR 47.305-2 (about packaging) when asked about Section M evaluation factors — retrieval pulled the wrong chunk and the reranker promoted it. This RAGAS-style dimension is what dropped.  
+- *Clue:* A model cited real clause FAR 47.305-2 (about packaging) when asked about Section M evaluation factors — retrieval pulled the wrong chunk and the reranker promoted it. This RAGAS-style dimension is what dropped.  
 - *Response:* **What is faithfulness?**  
 - *FDE teaching:* Faithfulness = does the answer stay true to the retrieved context. RAG doesn't auto-fix wrong retrieval; a bad reranker can promote the wrong chunk.  
 - *Source:* W2 Thu war-room / W2 Fri eval harness
 
 **$1000 **[TRAP]****  
 
-- *Clue:* When W2 Thu's RAG faithfulness check fails or retrieval confidence drops below threshold, the federal-acquisitions answer is NOT to ship a guess — instead the platform returns a 'needs_human_review' envelope and does THIS.  
-- *Response:* **What is escalate to a Contracting Officer (HITL #2 / fall back to a human)?**  
+- *Clue:* When a RAG faithfulness check fails or retrieval confidence drops below threshold, the federal-acquisitions answer is NOT to ship a guess — instead the platform returns a 'needs_human_review' envelope and does THIS.  
+- *Response:* **What is escalate to a Contracting Officer (fall back to a human)?**  
 - *FDE teaching:* TRAP: 'lower the threshold and ship the best guess' optimizes the wrong thing. HITL #2: when confidence drops, escalate; only the CO publishes to all vendors.  
 - *Source:* W2 Thu war-room (HITL #2)
 
@@ -232,14 +232,14 @@
 
 **$200**  
 
-- *Clue:* Per the FDE brief, when a CEO demo crashes, the great FDE fixes it in 4 minutes and achieves THIS outcome — the CEO never even knew an engineer was on the phone.  
+- *Clue:* When a CEO demo crashes, the great FDE fixes it in 4 minutes and achieves THIS outcome — the CEO never even knew an engineer was on the phone.  
 - *Response:* **What is staying calm in a crisis (crisis composure)?**  
 - *FDE teaching:* 'How you handle a crisis matters as much as whether you fix it.' Composure is a deliverable.  
 - *Source:* FDE brief Part 2 (trait 4) / Part 8
 
 **$400**  
 
-- *Clue:* The brief insists calm under pressure is THIS, not personality — built by volunteering for on-call, taking the escalation, and joining the war room until you have a playbook in your head.  
+- *Clue:* Calm under pressure is THIS, not personality — built by volunteering for on-call, taking the escalation, and joining the war room until you have a playbook in your head.  
 - *Response:* **What is preparation?**  
 - *FDE teaching:* 'Calm is preparation, not personality.' By the 10th incident you have a playbook. The whole programme's daily war-room is this rehearsal.  
 - *Source:* FDE brief Part 3
@@ -253,14 +253,14 @@
 
 **$800**  
 
-- *Clue:* In W2 Wed's incident, re-indexing FAR Part 15 with the new chunking strategy quietly lost the DFARS 215.3xx supplements because of THIS kind of bug — the DFARS files sit one directory deeper.  
+- *Clue:* Re-indexing FAR Part 15 with a new chunking strategy quietly lost the DFARS 215.3xx supplements — the DFARS files sit one directory deeper — an instance of THIS kind of bug.  
 - *Response:* **What is a folder-walk (directory traversal) bug?**  
 - *FDE teaching:* Silent data loss on re-index. The kind of regression the eval harness is supposed to catch — 'you can't trust the system you've never seen the data for.'  
 - *Source:* W2 Wed war-room
 
 **$1000**  
 
-- *Clue:* The brief's Cassandra horror story — an empty date became epoch 1970, spawning 2.3M keyspaces and demanding 14TB of RAM to boot — is the canonical example of THIS anti-pattern.  
+- *Clue:* The famous Cassandra horror story — an empty date became epoch 1970, spawning 2.3M keyspaces and demanding 14TB of RAM to boot — is the canonical example of THIS anti-pattern.  
 - *Response:* **What is building without seeing the data?**  
 - *FDE teaching:* 'We had never seen the data this system would actually process.' Maps to hallucination/grounding: see the data before you trust the system.  
 - *Source:* FDE brief Part 5 / Part 7
@@ -278,7 +278,7 @@
 
 **$200 **[TRAP]****  
 
-- *Clue:* Complete the FDE brief's one-sentence core: 'An FDE is a software engineer who owns customer ___.'  
+- *Clue:* Complete the FDE one-liner: 'An FDE is a software engineer who owns customer ___.'  
 - *Response:* **What are outcomes?**  
 - *FDE teaching:* TRAP: 'relationships' or 'satisfaction scores.' Neither — outcomes: the actual results the customer is trying to achieve.  
 - *Source:* FDE brief Part 1 / Part 8
@@ -292,21 +292,21 @@
 
 **$600**  
 
-- *Clue:* The brief contrasts an output — shipping the PR — with an outcome, given as THIS concrete example involving an analyst's morning.  
+- *Clue:* Contrast an output — shipping the PR — with an outcome, captured by THIS concrete example involving an analyst's morning.  
 - *Response:* **What is the analyst's morning being 45 minutes shorter?**  
 - *FDE teaching:* FDEs are measured on the outcome, not the merge. The daily papercut (the 45-min Excel ritual) is what you hunt for on a first site visit.  
 - *Source:* FDE brief Part 1 / Part 4
 
 **$800**  
 
-- *Clue:* Per the brief, most enterprise software fails not because it's technically broken but because it never gets THIS — making it the enemy the FDE model exists to defeat.  
+- *Clue:* Most enterprise software fails not because it's technically broken but because it never gets THIS — making it the enemy the FDE model exists to defeat.  
 - *Response:* **What is adopted (adoption)?**  
 - *FDE teaching:* 'Shelfware is the enemy.' Software that gets adopted is worth infinitely more than software that sits on a shelf.  
 - *Source:* FDE brief Part 3
 
 **$1000**  
 
-- *Clue:* The brief calls THIS 'the hardest skill' — getting a team that doesn't report to you to act, by explaining the why (revenue, renewal, the customer's own words) rather than the what.  
+- *Clue:* THIS is often called 'the hardest skill' — getting a team that doesn't report to you to act, by explaining the why (revenue, renewal, the customer's own words) rather than the what.  
 - *Response:* **What is owning outcomes without authority?**  
 - *FDE teaching:* Trait 5. Credibility is points you can spend; you earn the right to direct by being right and delivering.  
 - *Source:* FDE brief Part 2 (trait 5) / Part 3
@@ -335,28 +335,28 @@
 
 **$800**  
 
-- *Clue:* In W3, when every agent in the multi-agent flow writes its own AuditEvent, the W1 brownfield-debt Item 2 audit-log race becomes catastrophic. The defense: a single audit-writer plus THIS threaded identifier.  
+- *Clue:* When every agent in a multi-agent flow writes its own AuditEvent, a latent audit-log race condition becomes catastrophic. The defense: a single audit-writer plus THIS threaded identifier.  
 - *Response:* **What is correlation_id (correlation-id threading)?**  
 - *FDE teaching:* Audit fan-out multiplies the race from one lost row to many. Single audit-writer + correlation_id. (Item 6 fix, deferred to W5 W3C traceparent.)  
 - *Source:* W3 Wed pre-session §9 / glossary
 
 **$1200 **[DAILY DOUBLE]****  
 
-- *Clue:* The W3 Wed reading warns that on Day 3 you should use LangGraph's primitives rather than doing THIS — which is only a scenario-alternative to evaluate, never the path you commit to.  
+- *Clue:* You should use LangGraph's primitives rather than doing THIS — only ever a scenario-alternative to evaluate in an ADR, never the path you commit to.  
 - *Response:* **What is hand-rolling multi-agent orchestration?**  
 - *FDE teaching:* Don't hand-roll the orchestrator. Use the framework primitives; evaluate hand-rolling in an ADR, don't ship it on day 3.  
 - *Source:* W3 Wed pre-session §9
 
 **$1600 **[TRAP]****  
 
-- *Clue:* The W3 Wed anti-pattern '_______' — every additional agent multiplies the failure surface, so you must defend each agent's existence — echoes the FDE habit of NOT reaching for multi-agent when ReAct suffices.  
+- *Clue:* The anti-pattern '_______' — every additional agent multiplies the failure surface, so you must defend each agent's existence — echoes the FDE habit of NOT reaching for multi-agent when ReAct suffices.  
 - *Response:* **What is 'just one more agent'?**  
 - *FDE teaching:* TRAP: more agents feels more capable. Each agent multiplies failure surface. Single-agent before multi-agent — calibrate engineering to the situation.  
 - *Source:* W3 Wed pre-session §9 / FDE brief Part 7
 
 **$2000**  
 
-- *Clue:* The W3 Wed reading warns NOT to put HITL #4 only on the SSA boundary, because that conflates it with HITL #5. HITL #4 actually lives HERE.  
+- *Clue:* Don't collapse the human-approval gate on multi-agent handoffs onto the final SSA decision boundary — the earlier handoff gate actually lives HERE.  
 - *Response:* **What is between worker handoffs (the supervisor approving the next worker invocation)?**  
 - *FDE teaching:* HITL #4 = supervisor reviews the proposed worker tool-call before firing. HITL #5 (Thu) = the SSA hard gate. Don't conflate the two touchpoints.  
 - *Source:* W3 Wed pre-session §9
@@ -374,14 +374,14 @@
 
 **$400**  
 
-- *Clue:* W1 Fri's three-part test for whether an LLM output needs a human gate: reversibility, audit demands, and THIS — does the action affect external parties like awarding a contract or publishing a notice?  
+- *Clue:* The three-part test for whether an LLM output needs a human gate: reversibility, audit demands, and THIS — does the action affect external parties like awarding a contract or publishing a notice?  
 - *Response:* **What is blast radius?**  
 - *FDE teaching:* Gate on reversibility + blast radius + audit demands. A search needs no gate; awarding a contract does.  
 - *Source:* W1 Thu pre-session §7 / W1 Fri war-room
 
 **$800**  
 
-- *Clue:* The LangGraph parameter the cohort sets to ['ssa_review_ssdd'] to force a human approval before that node executes — the technical anchor of HITL #5.  
+- *Clue:* The LangGraph parameter set to ['ssa_review_ssdd'] to force human approval before that node executes — the technical anchor of the hard human gate.  
 - *Response:* **What is interrupt_before?**  
 - *FDE teaching:* interrupt_before pauses the graph for human approval at a named node. The mechanism behind the hard gate.  
 - *Source:* W3 Thu PLAN / W3 Wed §8
@@ -402,7 +402,7 @@
 
 **$2000**  
 
-- *Clue:* The FDE brief reframes HITL touchpoints across the programme as these — the W3 Fri gate defense, convincing the Agency CIO and OIG, is described as a rehearsal of owning them.  
+- *Clue:* HITL touchpoints across the programme are best understood as these — and the gate defense, convincing the Agency CIO and OIG, is a rehearsal of owning them.  
 - *Response:* **What are authority boundaries (outcome-ownership boundaries)?**  
 - *FDE teaching:* HITL = where human authority must sit. The gate defenses ARE FDE outcome-ownership rehearsals, defended in front of CO/CIO/OIG.  
 - *Source:* FDE brief Part 6 / Part 7
@@ -434,14 +434,14 @@
 
 **$1200**  
 
-- *Clue:* For state-mutating agent tools, THIS property — making a repeated call safe to apply only once — is the W3 Tue requirement that read-only inference doesn't need but write tools do.  
+- *Clue:* For state-mutating agent tools, THIS property — making a repeated call safe to apply only once — is the requirement that read-only inference doesn't need but write tools do.  
 - *Response:* **What is idempotency?**  
 - *FDE teaching:* Read inference can retry freely; state-mutating tools need idempotency keys so a retried write applies once.  
 - *Source:* W3 Tue PLAN
 
 **$1600**  
 
-- *Clue:* The TypedDict (e.g., EvaluationState) that the LangGraph state machine threads through its nodes, designed Thu of W3.  
+- *Clue:* The TypedDict (e.g., EvaluationState) that the LangGraph state machine threads through its nodes.  
 - *Response:* **What is the state schema (graph state)?**  
 - *FDE teaching:* State schema design is the Thu anchor; the typed state is what checkpointing persists.  
 - *Source:* W3 Thu PLAN
@@ -519,14 +519,14 @@
 
 **$800**  
 
-- *Clue:* Treating the W1 system prompt as THIS — an architectural artifact with named sections, version control, and tests — rather than a string literal buried in code.  
+- *Clue:* Treating the system prompt as THIS — an architectural artifact with named sections, version control, and tests — rather than a string literal buried in code.  
 - *Response:* **What is code (treat the prompt as code)?**  
 - *FDE teaching:* Context engineering: prompts live in version control, have tests, are ADR-worthy. Static persona/constraints separated from dynamic RAG context.  
 - *Source:* W1 Thu pre-session §3
 
 **$1200**  
 
-- *Clue:* In W1 Fri's structured output work, the cohort uses THIS Python library in strict mode (extra='forbid') to validate the Bedrock response BEFORE it leaves the AI service.  
+- *Clue:* For structured-output work, the cohort uses THIS Python library in strict mode (extra='forbid') to validate the Bedrock response BEFORE it leaves the AI service.  
 - *Response:* **What is Pydantic?**  
 - *FDE teaching:* Pydantic strict-mode on the Python side + Bean Validation on the Spring side = defense in depth. The two schemas must agree or Codex flags the drift.  
 - *Source:* W1 Thu pre-session §1–2
@@ -558,14 +558,14 @@
 
 **$400**  
 
-- *Clue:* FDE trait 3 — speaking the same problem in different language for the CTO versus the eng lead — summarized by the brief's one-page test: 'If you can't explain it in one page without ___, you don't understand it.'  
+- *Clue:* FDE trait 3 — speaking the same problem in different language for the CTO versus the eng lead — summarized by the one-page test: 'If you can't explain it in one page without ___, you don't understand it.'  
 - *Response:* **What is jargon?**  
 - *FDE teaching:* Communicate across audiences. The W3 Fri defense is tier-aware: CIO Q&A vs OIG Q&A vs architecture defense — same system, three languages.  
 - *Source:* FDE brief Part 2 (trait 3) / Part 7
 
 **$800**  
 
-- *Clue:* The brief's metaphor for how a technical message degrades each time it passes through another person — which FDEs short-circuit by being in the room.  
+- *Clue:* The metaphor for how a technical message degrades each time it passes through another person — which FDEs short-circuit by being in the room.  
 - *Response:* **What is the telephone game?**  
 - *FDE teaching:* Every hop degrades the message. Be in the room. The opposite of 'throwing it over the wall.'  
 - *Source:* FDE brief Part 3
@@ -586,7 +586,7 @@
 
 **$2000**  
 
-- *Clue:* The brief's scheduling principle that builds CIO trust — phrased as 'Done Wednesday, finished Tuesday beats Done Monday, finished Wednesday.'  
+- *Clue:* The scheduling principle that builds CIO trust — 'Done Wednesday, finished Tuesday beats Done Monday, finished Wednesday.'  
 - *Response:* **What is underpromise and overdeliver?**  
 - *FDE teaching:* Overpromising ('Done Monday' then delivering Wednesday) destroys trust. Credibility is points you can spend.  
 - *Source:* FDE brief Part 3 / Part 5
@@ -598,11 +598,10 @@
 
 **Category:** FIELD NOTES — THE FDE JUDGMENT CALL
 
-**Clue:** At the W3 Friday Mid-Program Gate, the Agency CIO says: 'Just have the AI auto-approve the routine evaluation scores and award decisions — your faithfulness numbers look great and my staff are slammed. Ship full autonomy Monday.' Per the FDE mindset AND FAR 15.308, name the single move that is BOTH the right technical answer and the right FDE answer.
+**Clue:** At the Phase 1 gate defense, the Agency CIO says: 'Just have the AI auto-approve the routine evaluation scores and award decisions — your faithfulness numbers look great and my staff are slammed. Ship full autonomy now.' Per the FDE mindset AND FAR 15.308, name the single move that is BOTH the right technical answer and the right FDE answer.
 
 **Correct response:** **What is push back with an alternative — keep the human (SSA) hard-gate on the irreversible award decision (it cannot be delegated), while showing where autonomy IS safe (reversible reads / low-blast-radius steps)?**
 
 **FDE teaching / adjudication:** This is the whole programme in one question. The trap is agreeing (the customer asked, the metrics look good) OR flatly refusing. The FDE move: understand the real need (overloaded staff = X), don't deliver the literal ask (full autonomy = Y), push back WITH an alternative grounded in FAR 15.308 (SSA authority can't be delegated) + HITL gating logic (gate the irreversible/high-blast-radius award; automate the reversible reads). Calibrate engineering to the situation, own the outcome, defend it across audiences. Good metrics never override a non-delegable authority boundary.
 
 **Source:** FDE brief Parts 2/3/5 + W3 FAR 15.308 + W1 Fri HITL test
-
